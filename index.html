@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Magical Smile Unlocker</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      text-align: center;
+      background: linear-gradient(to bottom right, #ffdee9, #b5fffc);
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    h1 {
+      color: #ff4e88;
+      font-size: 2.5rem;
+    }
+    .message {
+      font-size: 1.4rem;
+      margin: 20px;
+      color: #444;
+    }
+    .button {
+      background: #ff4e88;
+      color: white;
+      border: none;
+      padding: 15px 25px;
+      font-size: 1.2rem;
+      border-radius: 15px;
+      cursor: pointer;
+      margin: 10px;
+      transition: transform 0.2s ease;
+    }
+    .button:hover {
+      transform: scale(1.1);
+    }
+    .meter-container {
+      width: 300px;
+      background: #ddd;
+      border-radius: 25px;
+      margin: 20px auto;
+      overflow: hidden;
+      border: 2px solid #ff4e88;
+    }
+    .meter-fill {
+      height: 30px;
+      width: 0%;
+      background: linear-gradient(to right, #ff4e88, #ff99cc);
+      transition: width 0.4s ease;
+    }
+    .icecream {
+      font-size: 1.4rem;
+      display: none;
+      margin-top: 20px;
+      animation: bounce 1s infinite;
+    }
+    .ice-icon {
+      font-size: 3rem;
+      display: inline-block;
+      transition: font-size 0.3s ease;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    #biggerBtn {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>✨ Magical Smile Unlocker ✨</h1>
+  <p class="message">Dear Azra, you look <b>10x prettier</b> when you smile 😍<br>
+  Can you show me your biggest, happiest smile?</p>
+
+  <div class="meter-container">
+    <div class="meter-fill" id="meter"></div>
+  </div>
+
+  <button class="button" id="smileBtn">I’m Smiling Now 😁</button>
+
+  <div class="icecream" id="icecream">
+    <span class="ice-icon">🍦</span> here's a ice cream for princess. <span class="ice-icon">🍦</span>
+  </div>
+
+  <button class="button" id="biggerBtn">bigger</button>
+
+  <script>
+    let clicks = 0;
+    let iconSize = 3; // Initial size in rem
+    const meter = document.getElementById("meter");
+    const smileBtn = document.getElementById("smileBtn");
+    const icecream = document.getElementById("icecream");
+    const biggerBtn = document.getElementById("biggerBtn");
+    const iceIcons = icecream.querySelectorAll(".ice-icon");
+
+    smileBtn.addEventListener("click", () => {
+      clicks++;
+      const progress = Math.min((clicks / 5) * 100, 100);
+      meter.style.width = progress + "%";
+
+      if (clicks >= 5) {
+        icecream.style.display = "block";
+        smileBtn.disabled = true;
+        smileBtn.innerText = "Yay! You unlocked your Ice Cream 🎉";
+        biggerBtn.style.display = "inline-block";
+      }
+    });
+
+    biggerBtn.addEventListener("click", () => {
+      iconSize += 1; // Increase by 1rem each click (inch by inch approximation)
+      iceIcons.forEach(icon => {
+        icon.style.fontSize = iconSize + "rem";
+      });
+    });
+  </script>
+</body>
+</html>
