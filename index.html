@@ -63,6 +63,9 @@
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
     }
+    #biggerBtn {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -78,11 +81,14 @@
 
   <div class="icecream" id="icecream">🍦 Here’s your Ice Cream! 🍦</div>
 
+  <button class="button" id="biggerBtn">bigger</button>
+
   <script>
     let clicks = 0;
     const meter = document.getElementById("meter");
     const smileBtn = document.getElementById("smileBtn");
     const icecream = document.getElementById("icecream");
+    const biggerBtn = document.getElementById("biggerBtn");
 
     smileBtn.addEventListener("click", () => {
       clicks++;
@@ -93,7 +99,15 @@
         icecream.style.display = "block";
         smileBtn.disabled = true;
         smileBtn.innerText = "Yay! You unlocked your Ice Cream 🎉";
+        biggerBtn.style.display = "inline-block";
       }
+    });
+
+    biggerBtn.addEventListener("click", () => {
+      icecream.style.fontSize = "5rem";
+      icecream.innerText = "🍦 here's a ice cream for you cutiee. 🍦";
+      biggerBtn.disabled = true;
+      biggerBtn.innerText = "Bigger Ice Cream Unlocked! 🎉";
     });
   </script>
 </body>
