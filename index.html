@@ -1,95 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Magical Smile Unlocker ✨</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Magical Smile Unlocker</title>
   <style>
-    :root {
-      --bg1: #fff7ff;
-      --bg2: #e8fbff;
-      --accent: #ff70a6;
-      --accent2: #6ee7ff;
-      --accent3: #ffd166;
-      --ink: #2a2a2a;
-    }
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
     body {
-      margin: 0;
-      font-family: 'Fredoka', system-ui;
-      color: var(--ink);
-      background: linear-gradient(120deg, #fdfcff, #f3fcff);
-      overflow-x: hidden;
-    }
-    .wrap { min-height: 100%; display: grid; place-items: center; padding: 24px; }
-    .card {
-      width: min(720px, 92vw);
-      background: #ffffffcc;
-      border-radius: 28px;
-      box-shadow: 0 30px 60px rgba(0,0,0,0.08);
-      padding: 28px 22px 22px;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
       text-align: center;
+      background: linear-gradient(to bottom right, #ffdee9, #b5fffc);
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
-    .title { font-weight: 700; font-size: clamp(24px, 4vw, 36px); margin: 6px 0 10px; }
-    .story { font-size: clamp(16px, 2.6vw, 20px); line-height: 1.5; margin: 10px 0 20px; }
+    h1 {
+      color: #ff4e88;
+      font-size: 2.5rem;
+    }
+    .message {
+      font-size: 1.4rem;
+      margin: 20px;
+      color: #444;
+    }
     .button {
-      display: inline-flex; align-items: center; justify-content: center;
-      margin: 8px auto 16px; width: 100%; max-width: 360px; height: 64px;
-      border-radius: 18px; border: none; cursor: pointer;
-      font-size: 20px; font-weight: 700;
-      background: linear-gradient(180deg, #ff9fbd, #ff70a6);
-      color: #fff; box-shadow: 0 10px 18px rgba(255, 112, 166, .35);
+      background: #ff4e88;
+      color: white;
+      border: none;
+      padding: 15px 25px;
+      font-size: 1.2rem;
+      border-radius: 15px;
+      cursor: pointer;
+      margin: 10px;
+      transition: transform 0.2s ease;
     }
-    .meter { width: 100%; max-width: 520px; height: 14px; margin: 0 auto 8px; background: #fff; border-radius: 999px; overflow: hidden; box-shadow: inset 0 0 0 2px #ffe3ee; }
-    .meter > span { display: block; height: 100%; width: 0%; border-radius: 999px; background: linear-gradient(90deg, #a7f3d0, #6ee7ff, #ffd166, #ff70a6); transition: width 0.4s ease; }
-    .celebrate { font-size: clamp(16px, 2.6vw, 22px); margin: 8px 0 2px; display: none; }
-    .icecream { font-size: 50px; margin-top: 20px; display: none; animation: bounce 1s infinite alternate; }
-    @keyframes bounce { from { transform: translateY(0);} to { transform: translateY(-12px);} }
+    .button:hover {
+      transform: scale(1.1);
+    }
+    .meter-container {
+      width: 300px;
+      background: #ddd;
+      border-radius: 25px;
+      margin: 20px auto;
+      overflow: hidden;
+      border: 2px solid #ff4e88;
+    }
+    .meter-fill {
+      height: 30px;
+      width: 0%;
+      background: linear-gradient(to right, #ff4e88, #ff99cc);
+      transition: width 0.4s ease;
+    }
+    .icecream {
+      font-size: 3rem;
+      display: none;
+      margin-top: 20px;
+      animation: bounce 1s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <main class="card">
-      <div class="title">Magical Smile Unlocker ✨</div>
-      <p class="story">Only your smile can fill the magic meter. Tap the button while smiling to charge it up! When it reaches full, you’ll earn a yummy surprise 🍦</p>
-      
-      <div class="meter"><span id="meterFill"></span></div>
-      <p id="meterLabel">Smile power: 0%</p>
-      
-      <button class="button" id="smileBtn">I’m smiling now 😄</button>
-      
-      <p class="celebrate" id="celebrateText">YAAAY! You unlocked the magic! 🌟</p>
-      <div class="icecream" id="icecream">🍦🍦🍦</div>
-    </main>
+  <h1>✨ Magical Smile Unlocker ✨</h1>
+  <p class="message">Dear Azra, you look <b>10x prettier</b> when you smile 😍<br>
+  Can you show me your biggest, happiest smile?</p>
+
+  <div class="meter-container">
+    <div class="meter-fill" id="meter"></div>
   </div>
 
+  <button class="button" id="smileBtn">I’m Smiling Now 😁</button>
+
+  <div class="icecream" id="icecream">🍦 Here’s your Ice Cream! 🍦</div>
+
   <script>
-    const btn = document.getElementById('smileBtn');
-    const meterFill = document.getElementById('meterFill');
-    const meterLabel = document.getElementById('meterLabel');
-    const celebrateText = document.getElementById('celebrateText');
-    const icecream = document.getElementById('icecream');
-    let clickCount = 0;
+    let clicks = 0;
+    const meter = document.getElementById("meter");
+    const smileBtn = document.getElementById("smileBtn");
+    const icecream = document.getElementById("icecream");
 
-    function animateMeter(to){
-      meterFill.style.width = to + '%';
-      meterLabel.textContent = `Smile power: ${to}%`;
-    }
+    smileBtn.addEventListener("click", () => {
+      clicks++;
+      const progress = Math.min((clicks / 5) * 100, 100);
+      meter.style.width = progress + "%";
 
-    btn.addEventListener('click', () => {
-      if (clickCount < 5) {
-        clickCount++;
-        const progress = Math.min(clickCount * 20, 100);
-        animateMeter(progress);
-
-        if (clickCount === 5) {
-          celebrateText.style.display = 'block';
-          icecream.style.display = 'block';
-        }
+      if (clicks >= 5) {
+        icecream.style.display = "block";
+        smileBtn.disabled = true;
+        smileBtn.innerText = "Yay! You unlocked your Ice Cream 🎉";
       }
     });
   </script>
