@@ -54,10 +54,15 @@
       transition: width 0.4s ease;
     }
     .icecream {
-      font-size: 3rem;
+      font-size: 1.4rem;
       display: none;
       margin-top: 20px;
       animation: bounce 1s infinite;
+    }
+    .ice-icon {
+      font-size: 3rem;
+      display: inline-block;
+      transition: font-size 0.3s ease;
     }
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
@@ -79,16 +84,20 @@
 
   <button class="button" id="smileBtn">I’m Smiling Now 😁</button>
 
-  <div class="icecream" id="icecream">🍦 Here’s your Ice Cream! 🍦</div>
+  <div class="icecream" id="icecream">
+    <span class="ice-icon">🍦</span> here's a ice cream for princess. <span class="ice-icon">🍦</span>
+  </div>
 
   <button class="button" id="biggerBtn">bigger</button>
 
   <script>
     let clicks = 0;
+    let iconSize = 3; // Initial size in rem
     const meter = document.getElementById("meter");
     const smileBtn = document.getElementById("smileBtn");
     const icecream = document.getElementById("icecream");
     const biggerBtn = document.getElementById("biggerBtn");
+    const iceIcons = icecream.querySelectorAll(".ice-icon");
 
     smileBtn.addEventListener("click", () => {
       clicks++;
@@ -104,10 +113,10 @@
     });
 
     biggerBtn.addEventListener("click", () => {
-      icecream.style.fontSize = "5rem";
-      icecream.innerText = "🍦 here's a ice cream for you cutiee. 🍦";
-      biggerBtn.disabled = true;
-      biggerBtn.innerText = "Bigger Ice Cream Unlocked! 🎉";
+      iconSize += 1; // Increase by 1rem each click (inch by inch approximation)
+      iceIcons.forEach(icon => {
+        icon.style.fontSize = iconSize + "rem";
+      });
     });
   </script>
 </body>
